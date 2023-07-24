@@ -31,7 +31,9 @@ return function(Enviroment)
             local Object = Instance.new(Class)
 
             for Property, Value in pairs(Properties) do
-                if pcall(function() local Property = Object[Property] end) then
+            	if type(Value) == "function" then
+            		Object[Property]:Connect(Value)
+                elseif pcall(function() local Property = Object[Property] end) then
                     Object[Property] = Value
                 else
                     Value.Parent = Object
