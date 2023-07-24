@@ -1,5 +1,6 @@
 
 local Classes = { 
+    "UIStroke",
     "Sky", "Hat", "Bone", "Chat", "Seat", "Fire", "Beam", "Skin", "Tool", "File", 
     "Snap", "Weld", "Part", "Hint", "Flag", "Team", "Sound", "Shirt", "Teams", "Motor", 
     "Smoke", "Decal", "Pants", "Light", "Model", "Frame", "Trail", "Clouds", "Camera", "Torque", 
