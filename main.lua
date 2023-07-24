@@ -1,4 +1,3 @@
-
 local Classes = { 
     "UIStroke",
     "Sky", "Hat", "Bone", "Chat", "Seat", "Fire", "Beam", "Skin", "Tool", "File", 
@@ -33,7 +32,9 @@ return function(Enviroment)
             for Property, Value in pairs(Properties) do
             	if type(Value) == "function" then
             		Object[Property]:Connect(function(...)
-            		    Value(Object, ...)
+            			if Object.Parent then
+            		    	Value(Object, ...)
+            		    end
             		end)
                 elseif pcall(function() local Property = Object[Property] end) then
                     Object[Property] = Value
