@@ -32,7 +32,9 @@ return function(Enviroment)
 
             for Property, Value in pairs(Properties) do
             	if type(Value) == "function" then
-            		Object[Property]:Connect(Value)
+            		Object[Property]:Connect(function(...)
+                        Value(Object, ...)
+                    end)
                 elseif pcall(function() local Property = Object[Property] end) then
                     Object[Property] = Value
                 else
