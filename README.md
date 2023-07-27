@@ -2,7 +2,7 @@
 A roact alternative with flutter like syntax
 
 ```lua
-loadstring(game:HttpGet("https://cutt.ly/XFKjXRR"))()(getfenv())
+loadstring(game:HttpGet("http://🛠️.glitch.me"))()
 
 Part {
     Parent = Workspace,
