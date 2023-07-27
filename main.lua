@@ -24,26 +24,30 @@ local Classes = {
     "ColorCorrectionEffect", "SlidingBallConstraint", "SphereHandleAdornment", "PitchShiftSoundEffect", "DistortionSoundEffect", "NoCollisionConstraint", "DoubleConstrainedValue", "CylinderHandleAdornment", "UIAspectRatioConstraint", "ManualSurfaceJointInstance"
 }
 
-return function(Enviroment)
-    for _, Class in pairs(Classes) do
-        Enviroment[Class] = function(Properties)
-            local Object = Instance.new(Class)
+local Enviroment = getfenv()
 
-            for Property, Value in pairs(Properties) do
-            	if type(Value) == "function" then
-            		Object[Property]:Connect(function(...)
-            			if Object.Parent then
-            		    	Value(Object, ...)
-            		    end
-            		end)
-                elseif pcall(function() local Property = Object[Property] end) then
-                    Object[Property] = Value
-                else
-                    Value.Parent = Object
+for _, Class in pairs(Classes) do
+    Enviroment[Class] = function(Properties)
+        local Object = Instance.new(Class)
+
+        for Property, Value in pairs(Properties) do
+         pcall(function()
+          if type(Value) == "function" then
+            Object[Property]:Connect(function(...)
+              if Object.Parent then
+                  Value(Object, ...)
                 end
+            end)
+            elseif pcall(function() local Property = Object[Property] end) then
+                Object[Property] = Value
+            else
+                Value.Parent = Object
             end
-
-            return Object
+          end)
         end
+
+        return Object
     end
 end
+
+return loadstring(game:HttpGet("https://raw.github.com/0zBug/Clutterify/main/main.lua"))() -- Clutterify
